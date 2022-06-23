@@ -107,7 +107,7 @@ console.log(search);
         
       </div>
     ))}
-   <p>Testing</p>
+ 
    </div>
    </div>
   );
