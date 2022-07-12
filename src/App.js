@@ -58,13 +58,14 @@ function App() {
   }
   const searching = () => {
     if (inputValue.length > 0) {
-    setSearch(data.filter(item => String(item.firstName).toLowerCase().includes(String(inputValue).toLowerCase())));
+    setSearch(data.filter(item => 
+      String(item.firstName + " " + item.lastName + "      ").toLowerCase().includes(String(inputValue).toLowerCase()) && String(item.firstName) !== "null" ));
+    
     } else {
       setSearch([]);
     }
   }
-      
-console.log(inputValue)
+
   useEffect(() => {
     const searchBar = document.getElementById("searchbar");
     if (searchBar) {
@@ -76,6 +77,29 @@ console.log(inputValue)
       } 
     }
 },);
+const test2 = () => {
+  const testt = document.getElementById("Search-container")
+  if (inputValue != "") {
+   testt.style.display = "block"
+ } else {
+   testt.style.display = "none"
+ };
+ }
+
+ /*
+    <button id="button" onClick={() => {
+      data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]).length === 0? setValue("Not Found"): setValue(data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]));
+      setCount(data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]).map(item => item.careerPoints));
+      
+      }}  type="button" >FIND</button>
+*/
+useEffect(() => {
+  const test = document.getElementById("searchbar");
+  if (test) {
+    test.addEventListener("keyup", test2)
+  }
+ },)
+  
  if (loading) return <p>Loading</p>;
 console.log(search);
 
@@ -86,28 +110,19 @@ console.log(search);
    <form>
     <label htmlFor="searchbar"></label>
     <input id="searchbar" type="text" name="fullname" placeholder="Enter a player's first and last name i.e 'Scottie Barnes' "></input>
-    <button id="button" onClick={() => {
-      data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]).length === 0? setValue("Not Found"): setValue(data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]));
-      setCount(data.filter(item => String(item.firstName).toLowerCase() === lowercase[0] && String(item.lastName).toLowerCase() === lowercase[1]).map(item => item.careerPoints));
-      
-      }}  type="button" >FIND</button>
-    <button  type="button"></button>
+  
    </form>
-  <p>{value === "Not Found"? "Oops": "" }</p>
-  <div>
-   {value === "" || value === "Not Found"? "":<img id="headshot" src={stats("headShotUrl")} ></img>}
-  </div>
-   <p>{stats("firstName")} {stats("lastName")}</p>
-   <p>{value === "" || value === "Not Found"? "": "Career PPG: " + stats("careerPoints")}</p>
-   <p>{value === "" || value === "Not Found"? "": "Career RPG: " + stats("careerRebounds")}</p>
-   <p>{value === "" || value === "Not Found"? "": "Career APG: " + stats("carrerAssists")}</p>
-  {search.map((item) => (
-      <div>
-        <p className='Search-item'>{item.firstName + " " + item.lastName}</p>
-        
-      </div>
-    ))}
  
+  
+   <div id="Search-container"  className="borderbottom">
+  {search.map((item) => (
+      <div className="Search-item-container" >
+        <p className='Search-item'>{item.firstName + " " + item.lastName}</p>
+        <img className="headshot" src={item.headShotUrl != null? item.headShotUrl: "https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId=charlie-brown&width=272&height=272"}></img>
+      </div>  
+    
+    ))}
+  </div>
    </div>
    </div>
   );
