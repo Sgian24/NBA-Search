@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/NBA-Search/static/css/main.537d5ddd.css",
-    "main.js": "/NBA-Search/static/js/main.a17bc5cc.js",
+    "main.js": "/NBA-Search/static/js/main.47f7fdb5.js",
     "static/js/787.e49e548c.chunk.js": "/NBA-Search/static/js/787.e49e548c.chunk.js",
     "index.html": "/NBA-Search/index.html",
     "main.537d5ddd.css.map": "/NBA-Search/static/css/main.537d5ddd.css.map",
-    "main.a17bc5cc.js.map": "/NBA-Search/static/js/main.a17bc5cc.js.map",
+    "main.47f7fdb5.js.map": "/NBA-Search/static/js/main.47f7fdb5.js.map",
     "787.e49e548c.chunk.js.map": "/NBA-Search/static/js/787.e49e548c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.537d5ddd.css",
-    "static/js/main.a17bc5cc.js"
+    "static/js/main.47f7fdb5.js"
   ]
 }
