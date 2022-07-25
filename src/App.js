@@ -77,12 +77,12 @@ function App() {
       } 
     }
 },);
-const test2 = () => {
-  const testt = document.getElementById("Search-container")
+const visibility = () => {
+  const searchContainer = document.getElementById("Search-container")
   if (inputValue != "") {
-   testt.style.display = "block"
+   searchContainer.style.display = "block"
  } else {
-   testt.style.display = "none"
+   searchContainer.style.display = "none"
  };
  }
 
@@ -94,14 +94,23 @@ const test2 = () => {
       }}  type="button" >FIND</button>
 */
 useEffect(() => {
-  const test = document.getElementById("searchbar");
-  if (test) {
-    test.addEventListener("keyup", test2)
+  const searchBar = document.getElementById("searchbar");
+  if (searchBar) {
+    searchBar.addEventListener("keyup", visibility)
   }
  },)
-  
+ 
+useEffect(() => {
+  const searchItem = document.getElementById("Search-item");
+  if (searchItem) {
+    searchItem.addEventListener("mouseover", consolee)
+  }
+ },)
  if (loading) return <p>Loading</p>;
-console.log(search);
+const consolee = (event) => {
+  event.target.style.color = "orange";
+}
+
 
   return (
   <div>
@@ -116,9 +125,9 @@ console.log(search);
   
    <div id="Search-container"  className="borderbottom">
   {search.map((item) => (
-      <div className="Search-item-container" >
-        <p className='Search-item'>{item.firstName + " " + item.lastName}</p>
-        <img className="headshot" src={item.headShotUrl != null? item.headShotUrl: "https://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId=charlie-brown&width=272&height=272"}></img>
+      <div key={item.id}className="Search-item-container" >
+        <p  id="Search-item" className='Search-item'>{item.firstName + " " + item.lastName}</p>
+        <img className="headshot" src={item.headShotUrl != null? item.headShotUrl: "http://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png&scale=crop&transparent=true&w=300&h=218"}></img>
       </div>  
     
     ))}
