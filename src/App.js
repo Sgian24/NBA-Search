@@ -11,6 +11,7 @@ function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState([]);
+  const [hover, setHover] = useState([]);
 
   const options = {
     method: 'GET',
@@ -99,18 +100,32 @@ useEffect(() => {
     searchBar.addEventListener("keyup", visibility)
   }
  },)
- 
-useEffect(() => {
-  const searchItem = document.getElementById("Search-item");
-  if (searchItem) {
-    searchItem.addEventListener("mouseover", consolee)
+//const id = search.map(item => item.id);
+useEffect(() => {search.forEach((item) => {
+  const searchItem = document.getElementById(item.id);
+  const Popup = document.getElementById("Popup")
+  const settingHover = () => {
+    setHover(item);
   }
- },)
- if (loading) return <p>Loading</p>;
-const consolee = (event) => {
-  event.target.style.color = "orange";
+  const test2 = () => {
+    Popup.style.visibility ="visible";
+  } 
+  if (searchItem) {
+    searchItem.addEventListener("mouseover", settingHover)
+    searchItem.addEventListener("click", test2)
+    return () => {
+    searchItem.removeEventListener("mouseover", settingHover);
+    searchItem.removeEventListener("click", test2);
+    }
+  }
+})
+},)
+ 
+const close = () => {
+  document.getElementById('Popup').style.visibility = "Hidden"
 }
-
+ if (loading) return <p>Loading</p>;
+console.log(hover);
 
   return (
   <div>
@@ -121,16 +136,62 @@ const consolee = (event) => {
     <input id="searchbar" type="text" name="fullname" placeholder="Enter a player's first and last name i.e 'Scottie Barnes' "></input>
   
    </form>
- 
   
    <div id="Search-container"  className="borderbottom">
   {search.map((item) => (
-      <div key={item.id}className="Search-item-container" >
-        <p  id="Search-item" className='Search-item'>{item.firstName + " " + item.lastName}</p>
+      <div key={item.id}className="Search-item-container" id="Sic">
+        <p  id={item.id}className='Search-item' >{item.firstName + " " + item.lastName}</p>   
         <img className="headshot" src={item.headShotUrl != null? item.headShotUrl: "http://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png&scale=crop&transparent=true&w=300&h=218"}></img>
       </div>  
-    
     ))}
+  </div>
+  <div id='Popup'>
+    <div className='Popup-name-picture'>
+      <div className="Popup-name">
+        <p id="Name">{hover.firstName + " " + hover.lastName}</p>
+        <p id="Profile">{hover.team != null? hover.team: "N/a"}<br />{hover.position != null? hover.position: "N/a"}</p>
+      </div>
+    <img id="Popup-picture"src={hover.headShotUrl}></img>
+    </div>
+    <div className='Table-div'>
+    <table id="Table">
+      <tr>
+        <th>Age</th>
+        <th>Height</th>
+        <th class="Remove-border">Weight</th>
+      </tr>
+      <tr>
+        <td>{hover.age}</td>
+        <td >{hover.height}</td>
+        <td class="Remove-border">{hover.weight}</td>
+      </tr>
+    </table>
+    <table id="Table2">
+      <tr>
+        <th>CareerPPG</th>
+        <th>CareerAST</th>
+        <th class="Remove-border">CareerREB</th>
+      </tr>
+      <tr>
+        <td>{hover.careerPoints}</td>
+        <td>{hover.carrerAssists}</td>
+        <td class="Remove-border">{hover.careerRebounds}</td>
+      </tr>
+    </table>
+    <table id="Table3">
+      <tr>
+        <th>CareerFG%</th>
+        <th>Career3PT%</th>
+        <th class="Remove-border">CareerFT%</th>
+      </tr>
+      <tr>
+        <td>{hover.careerPercentageFieldGoal}</td>
+        <td>{hover.careerPercentageThree}</td>
+        <td class="Remove-border" >{hover.careerPercentageFreethrow}</td>
+      </tr>
+    </table>
+    </div>
+    <p id="Close" onClick={() => close()}>x</p>
   </div>
    </div>
    </div>
