@@ -108,7 +108,8 @@ useEffect(() => {search.forEach((item) => {
     setHover(item);
   }
   const test2 = () => {
-    Popup.style.visibility ="visible";
+    Popup.style.visibility = "visible";
+    Popup.style.opacity = 1;
   } 
   if (searchItem) {
     searchItem.addEventListener("mouseover", settingHover)
@@ -122,12 +123,14 @@ useEffect(() => {search.forEach((item) => {
 },)
  
 const close = () => {
-  document.getElementById('Popup').style.visibility = "Hidden"
+  document.getElementById('Popup').style.visibility = "hidden";
+  document.getElementById('Popup').style.opacity = 0;
 }
  if (loading) return <p>Loading</p>;
 console.log(hover);
 
   return (
+    
   <div>
     <div className="Main-div">
     <h1>Active NBA Players</h1>
